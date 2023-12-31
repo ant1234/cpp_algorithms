@@ -38,18 +38,24 @@ int main()
     numberOfDollars = int(usersMoney); //again 45.78 would be 45 here as an example
     numberOfCents = (usersMoney - float(numberOfDollars)) * 100.0f;
 
-
     tenDollarBills = usersMoney / 10;
     fiveDollarBills = (usersMoney - (tenDollarBills * 10)) / 5;
     twoDollarBills =  (usersMoney - ((tenDollarBills * 10) + (fiveDollarBills * 5))) / 2;
     oneDollarBills =  (usersMoney - ((tenDollarBills * 10) + (fiveDollarBills * 5) + (twoDollarBills * 2))) / 1;
 
+    twentyFiveCent = numberOfCents / 25;
+    tenCent = (numberOfCents - (twentyFiveCent * 25)) / 10;
+    fiveCent = (numberOfCents - ((twentyFiveCent * 25) + (tenCent * 10))) / 5;
+    oneCent = (numberOfCents - ((twentyFiveCent * 25) + (tenCent * 10) + (fiveCent * 5))) / 1;
 
     cout << tenDollarBills << " ten dollar bills" << endl;
     cout << fiveDollarBills << " five dollar bills" << endl;
     cout << twoDollarBills << " two dollar bills" << endl;
     cout << oneDollarBills << " one dollar bills" << endl;
-    cout << numberOfCents << " number of cents" << endl;
+    cout << twentyFiveCent << " number of 25 cents" << endl;
+    cout << tenCent << " number of 10 cents" << endl;
+    cout << fiveCent << " number of 5 cents" << endl;
+    cout << oneCent << " number of 1 cents" << endl;
 
     return 0;
 }
