@@ -20,7 +20,7 @@ int main() {
     
     */
     int input = 0;
-    std::cout << "Please entern an even number : ";
+    std::cout << "Please enter an even number : ";
     std::cin >> input;
 
     int halfDiamond = input / 2;
