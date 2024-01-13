@@ -2,8 +2,7 @@
 #include <string>
 #include <vector>
 
-bool primeNumber(int num); 
-bool isPrime;
+std::string primeNumber(int num); 
 std::string numberOutput;
 
 int main() {
@@ -17,15 +16,16 @@ int main() {
     return 0;
 }
 
-bool primeNumber(int num) {
+std::string primeNumber(int num) {
 
-    for(int i = 2; i <= num / 2; i++) {
+    std::string isPrime = "yes";
 
-        if(num % 2 == 0) {
-            isPrime = false;
-            break;
-        } else {
-            isPrime = true;
+    for(int i = 2; i < num; i++) {
+
+        // 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
+
+        if(num % i == 0) {
+            isPrime = "no";
             break;
         }
     }
