@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cmath>
 
-
-void pascalTriangle(int num); 
+long long  pascalTriangle(int i, int j, int n); 
 
 int main() {
 
@@ -19,25 +19,47 @@ int main() {
     std::cout << "Please enter a single number for the triangle : " << std::endl;
     std::cin >> input;
 
-    pascalTriangle(input);
-
-    return 0;
-}
-
-void pascalTriangle(int num) {
-
-   for(int i = 0; i < num; i++) {
+    for(int i = 0; i < input; i++) {
    
-    for (int j = 0; j < (num - i); j++) {  
-        std::cout << " ";  
-    }
+        for (int j = 0; j < (input - i); j++) {  
+            std::cout << " ";  
+        }
 
-    for (int j = 0; j <= i; j++) { 
-        std::cout << 1 << " ";  
-    }
+        for (int j = 0; j <= i; j++) { 
+            std::cout << pascalTriangle(i, j, input) << " ";  
+        }
     
     std::cout << std::endl;
 
    }
 
+    return 0;
 }
+
+long long  pascalTriangle(int i, int j, int n) {
+
+    if (i == 0 || i == n) {
+        return 1;
+    }
+
+    if (j == 0 || i == j) {
+        return 1;
+    }
+
+    long long result = i;
+
+    return result;
+
+}
+
+//     1 = with i  
+//    1 1 
+//   1 2 1 
+//  1 3 3 1 
+// 1 4 4 4 1 
+
+//     1 = with j
+//    1 1 
+//   1 1 1 
+//  1 1 2 1 
+//  1 1 2 3 1 
