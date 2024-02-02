@@ -36,34 +36,98 @@
 
 int * CreateDynamicArray(int capacity, int& size);
 void DeleteDynamicArray(int* dynamicArray, int &size);
-void InsertElement(int** dynamicArray, int element, int & size, int& capacity);
+bool InsertElement(int** dynamicArray, int element, int & size, int& capacity);
 void DeleteElement(int* dynamicArray, int elementIndex, int & size);
 void ResizeDynamicArray(int** dynamicArray, int size, int newCapacity);
 
 int main() {
+
+    int capacity = 5;
+    int size;
+    int* dynamicArray = CreateDynamicArray(capacity, size);
+
+    // Example usage
+    for (int i = 0; i < 10; i++) {
+        if (!InsertElement(&dynamicArray, i * 2, size, capacity)) {
+            std::cout << "Failed to insert element " << i * 2 << ". Resizing array.\n";
+        }
+    }
+
+    // Print the array
+    std::cout << "Dynamic Array: ";
+    for (int i = 0; i < size; i++) {
+        std::cout << dynamicArray[i] << " ";
+    }
+    std::cout << "\n";
+
+    // Delete an element
+    DeleteElement(dynamicArray, 3, size);
+
+    // Print the array after deletion
+    std::cout << "Dynamic Array after deletion: ";
+    for (int i = 0; i < size; i++) {
+        std::cout << dynamicArray[i] << " ";
+    }
+    std::cout << "\n";
+
+    // Resize the array
+    ResizeDynamicArray(&dynamicArray, size, capacity * 2);
+
+    // Delete the dynamic array
+    DeleteDynamicArray(dynamicArray, size);
 
     return 0;
 }
 
 int * CreateDynamicArray(int capacity, int& size) {
 
-    return 0;
+    size = 0;
+    return new int[capacity];
+
 }
 
 void DeleteDynamicArray(int* dynamicArray, int &size) {
-
+    delete[] dynamicArray;
+    size = 0;
 }
 
-void InsertElement(int** dynamicArray, int element, int & size, int& capacity) {
+bool InsertElement(int** dynamicArray, int element, int & size, int& capacity) {
+    if (size == capacity) {
+        // Need to resize the array before inserting the element
+        ResizeDynamicArray(dynamicArray, size, capacity * 2);
+        capacity *= 2;
+    }
 
+    (*dynamicArray)[size] = element;
+    size++;
+    return true;
 }
 
 void DeleteElement(int* dynamicArray, int elementIndex, int & size) {
+    if (elementIndex < 0 || elementIndex >= size) {
+        // Invalid index, do nothing
+        return;
+    }
 
+    // Shift elements to remove the one at elementIndex
+    for (int i = elementIndex; i < size - 1; i++) {
+        dynamicArray[i] = dynamicArray[i + 1];
+    }
+
+    size--;
 }
 
 void ResizeDynamicArray(int** dynamicArray, int size, int newCapacity) {
+    int* newArray = new int[newCapacity];
+    
+    // Copy elements from the old array to the new array
+    for (int i = 0; i < size; i++) {
+        newArray[i] = (*dynamicArray)[i];
+    }
 
+    // Delete the old array and update the pointer
+    delete[] * dynamicArray;
+    *dynamicArray = newArray;
 }
 
 
